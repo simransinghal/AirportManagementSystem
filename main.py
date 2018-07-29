@@ -45,7 +45,7 @@ def validate_last_name(df, last_name):
 
 def validate_flight_no(df, flight_no_entered):
     if (len(df.index) == 0):
-        print ("No Flight exists with the number: {0}".format(flight_no_entered))
+        print ("No such Flight exists or None of the passenger has done check in: {0}".format(flight_no_entered))
 	print
         query = raw_input("Do you want to try again with different Flight number [Y/N]: ")
         return check_query(query)
@@ -146,7 +146,7 @@ def FlightStaff():
         check = raw_input("Do you want to proceed with deletion of passengers details [Y/N]: ")
 
         if check.upper() == 'Y' or check.upper() == 'YES':
-            cur.execute("delete from PASSENGER where flight_no=?", flight_no_entered)
+            cur.execute("delete from PASSENGER where flight_no=" + flight_no_entered)
             conn.commit()
             print ("SUCESSFULLY DELETED...")
             print
