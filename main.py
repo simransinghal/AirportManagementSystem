@@ -81,13 +81,8 @@ def SequerityPersonnel():
         PNR_entered = raw_input("Please Enter the PNR number: ")
         flight_no_entr = raw_input("Please Enter the Flight number: ")
         
-        try:
-	   val = int(flight_no_entr)
-        except ValueError:
-	   print("Not a valid flight number")
-	   print
-	   return
-        
+        validate_flight_no_is_int(flight_no_entr)
+ 
         df = pd.read_sql_query("Select * from PASSENGER where PNR = " + "'" + PNR_entered + "'", conn)
     
         val = validate_pnr(df, PNR_entered)
@@ -134,13 +129,9 @@ def FlightStaff():
     while 1:
       
         flight_no_entered = raw_input("Please Enter the Flight number: ")
-        try:
-            val = int(flight_no_entered)
-        except ValueError:
-            print("Not a valid flight number")
-            print
-            return
-        
+
+        validate_flight_no_is_int(flight_no_entered)
+ 
         df = pd.read_sql_query("Select * from PASSENGER where Sequerity_CheckIN = 1 and flight_no = " + flight_no_entered + " ORDER BY TRIM(F_NAME) ASC, TRIM(L_NAME) ASC", conn)
     
         val = validate_flight_no(df, flight_no_entered)        
